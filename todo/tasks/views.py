@@ -4,6 +4,10 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7050fdafe5b8eedc939e765afe4e4e2869ff178b
 # Create your views here.
 
 def index(request):
@@ -48,3 +52,24 @@ def deleteTask(request, pk):
 
 
 
+<<<<<<< HEAD
+=======
+    context = {'tasks': tasks, 'form': form}
+    return render(request, 'tasks/list.html', context)
+
+
+def updateTask(request, pk):
+    task = Task.objects.get(id=pk)
+
+    form = TaskForm(instance=task)
+
+    if request.method == 'POST':
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+
+    return render(request, 'tasks/update_task.html')
+>>>>>>> 7050fdafe5b8eedc939e765afe4e4e2869ff178b
