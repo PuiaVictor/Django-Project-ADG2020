@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Puiuletii</title>
-</head>
-<body>
-<h3>
-    To Do
-</h3>
-<form method="POST" action="/">
-    {% csrf_token %}
-    {{form.title}}
-    <input type="submit" name="Create Task">
-</form>
-{% for task in tasks%}
-    <div>
-        <p>{{task}}</p>
-    </div>
-{% endfor %}
-</body>
-</html>
+<div>
+
+	<form method="POST" action="/">
+		{% csrf_token %}
+		{{form.title}}
+		<input type="submit" name="Create Task">
+	</form>
+
+	<div>
+
+	{% for task in tasks %}
+		<div>
+			<a href="{% url 'update_task' task.id %}">Update</a>
+			<a href="{% url 'delete' task.id %}">Delete</a>
+
+			{% if task.complete == True %}
+			<strike>{{task}}</strike>
+			{% else %}
+			<span>{{task}}</span>
+			{% endif %}
+		</div>
+	{% endfor %}
+	</div>
+</div>
